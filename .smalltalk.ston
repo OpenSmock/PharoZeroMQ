@@ -1,13 +1,13 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'ProjectName',
+      #baseline : 'PharoZeroMQ',
       #directory : 'src',
       #platforms : [ #pharo ]
     }
   ],
   #testing : {
     #failOnZeroTests : false,
-    #packages : [ 'ProjectNamePackage.*' ]
+    #packages : [ 'ZMQ.*' ]
   }
 }
