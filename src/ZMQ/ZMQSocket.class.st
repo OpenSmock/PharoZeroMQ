@@ -211,13 +211,13 @@ ZMQSocket >> recv: aMaxSize [
 { #category : #'api - messaging' }
 ZMQSocket >> recv: aMaxSize flags: flags [
 
-	| aBuffer  |
+	| aBuffer |
 	aBuffer := ByteArray new: aMaxSize.
-ZMQInterface default
-		       socket: pointer
-		       recv: aBuffer
-		       len: aMaxSize
-		       flags: flags.
+	ZMQInterface default
+		socket: pointer
+		recv: aBuffer
+		len: aMaxSize
+		flags: flags.
 
 
 	^ aBuffer contents

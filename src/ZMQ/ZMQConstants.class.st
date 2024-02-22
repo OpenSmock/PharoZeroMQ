@@ -16,6 +16,7 @@ Class {
 		'ZMQ_REP',
 		'ZMQ_REQ',
 		'ZMQ_REQ_RELAXED',
+		'ZMQ_ROUTING_ID',
 		'ZMQ_SUB',
 		'ZMQ_SUBSCRIBE',
 		'ZMQ_UNSUBSCRIBE',
@@ -41,6 +42,7 @@ ZMQConstants class >> initConstants [
 	ZMQ_REQ_RELAXED := 53.
 	ZMQ_IMMEDIATE := 39.
 	ZMQ_RCVMORE := 13.
+	 ZMQ_ROUTING_ID := 5.
 
 	"Flags "
 	ZMQ_DONTWAIT := 1.

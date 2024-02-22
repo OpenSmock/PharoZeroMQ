@@ -79,7 +79,7 @@ ZMQLibraryInterface class >> zmq_getsockopt: s with: option with: optval with: o
 	^ self
 		  ffiCall:
 			  #( int zmq_getsockopt #( void * s , int option , void * optval
-			        , size_t optvallen ) )
+			        , size_t * optvallen ) )
 		  module: LibZMQ
 ]
 

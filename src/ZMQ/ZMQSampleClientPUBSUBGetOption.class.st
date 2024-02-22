@@ -1,5 +1,5 @@
 Class {
-	#name : #ZMQSampleClientPUBSUBSetOption,
+	#name : #ZMQSampleClientPUBSUBGetOption,
 	#superclass : #ZMQSampleAbstractPUBSUB,
 	#pools : [
 		'ZMQConstants'
@@ -8,19 +8,19 @@ Class {
 }
 
 { #category : #'accessing - defaults' }
-ZMQSampleClientPUBSUBSetOption class >> defaultPortPUB [
+ZMQSampleClientPUBSUBGetOption class >> defaultPortPUB [
 
 	^ 31002
 ]
 
 { #category : #'accessing - defaults' }
-ZMQSampleClientPUBSUBSetOption class >> defaultPortSUB [
+ZMQSampleClientPUBSUBGetOption class >> defaultPortSUB [
 
 	^ 31001
 ]
 
 { #category : #connecting }
-ZMQSampleClientPUBSUBSetOption >> connectPublisher [
+ZMQSampleClientPUBSUBGetOption >> connectPublisher [
 	"Socket connection as a Publisher"
 
 	self socketSender: (ZMQSocket new: ZMQ_PUB).
@@ -29,10 +29,10 @@ ZMQSampleClientPUBSUBSetOption >> connectPublisher [
 ]
 
 { #category : #connecting }
-ZMQSampleClientPUBSUBSetOption >> connectSubscriber [
+ZMQSampleClientPUBSUBGetOption >> connectSubscriber [
 	"Socket connection as a Subscriber"
 
-	| bytes |
+
 	self socketReceiver: (ZMQSocket new: ZMQ_SUB).
 	self socketReceiver connect: 'tcp://' , self class defaultIP , ':'
 		, self class defaultPortSUB printString.
@@ -44,16 +44,20 @@ ZMQSampleClientPUBSUBSetOption >> connectSubscriber [
 		self socketReceiver
 			optionKey: ZMQ_SUBSCRIBE
 			optValue: (topicReceiver at: e) ].
-	bytes := (FFITypeArray ofType: 'int' size: 1) new.
-	bytes at: 1 put: 100.
-	self socketReceiver optionKey: ZMQ_BACKLOG optValue: bytes.
+
 
 	self threaded
 		ifFalse: [ self startThread ]
 		ifTrue: [ self startThreadWorker ]
 ]
 
+{ #category : #connecting }
+ZMQSampleClientPUBSUBGetOption >> getOptNumber: anOptionNumber [
+	"Socket connection as a Subscriber"
+^ self socketSender optionKey: 19.
+]
+
 { #category : #accessing }
-ZMQSampleClientPUBSUBSetOption >> processName [
+ZMQSampleClientPUBSUBGetOption >> processName [
 ^'ZMQ Client'
 ]
