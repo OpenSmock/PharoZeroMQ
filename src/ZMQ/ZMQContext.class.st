@@ -6,10 +6,7 @@ pointer : <aPointer>, points to a ZMQ Context
 "
 Class {
 	#name : #ZMQContext,
-	#superclass : #Object,
-	#instVars : [
-		'pointer'
-	],
+	#superclass : #FFIExternalObject,
 	#pools : [
 		'ZMQConstants'
 	],
@@ -18,39 +15,26 @@ Class {
 
 { #category : #'instance creation' }
 ZMQContext class >> new [
-	"Modified: Oct 14 2013 11:25 ludovic; "
 
-	^self new: 1
+	^ self new: 1
 ]
 
 { #category : #'instance creation' }
 ZMQContext class >> new: intIoThreads [
-	"Modified: Oct 14 2013 11:54 ludovic; "
 
 	| context |
-	context := super new.
-	context pointer: (ZMQInterface default ctxInit: intIoThreads).
-	^context
+	context := (ZMQInterface default ctxInit: intIoThreads).
+	^ context
 ]
 
 { #category : #dependencies }
 ZMQContext >> destroy [
+
 	| ret |
-	pointer ifNotNil: [ ret := ZMQInterface default ctxDestroy: pointer ].
+	handle ifNotNil: [ ret := ZMQInterface default ctxDestroy: handle ].
 	ret = -1 ifTrue: [
 		self error: 'ZMQ Context Error, unsuccessful destruction' ].
 	^ self
-]
-
-{ #category : #accessing }
-ZMQContext >> pointer [
-"ZMQ context pointer"
-^pointer
-]
-
-{ #category : #accessing }
-ZMQContext >> pointer: aValue [
-pointer := aValue
 ]
 
 { #category : #dependencies }

@@ -85,8 +85,10 @@ ZMQLibraryInterface class >> zmq_getsockopt: s with: option with: optval with: o
 
 { #category : #'procedures-zmq' }
 ZMQLibraryInterface class >> zmq_init: io_threads [
-	^self ffiCall: #(void *zmq_init (int io_threads)) module: LibZMQ 
-	
+
+	^ self
+		  ffiCall: #( ZMQContext zmq_init #( int io_threads ) )
+		  module: LibZMQ
 ]
 
 { #category : #'procedures-zmq' }
@@ -158,7 +160,10 @@ ZMQLibraryInterface class >> zmq_setsockopt: s with: option with: optval with: o
 
 { #category : #'procedures-zmq' }
 ZMQLibraryInterface class >> zmq_socket: context type: type [
-	^self ffiCall: #(void *zmq_socket (void *context, int type)) module: LibZMQ 
+
+	^ self
+		  ffiCall: #( ZMQSocket zmq_socket #( void * context , int type ) )
+		  module: LibZMQ
 ]
 
 { #category : #'procedures-zmq' }

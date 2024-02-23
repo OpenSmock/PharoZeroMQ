@@ -64,10 +64,11 @@ ZMQInterface >> socket: aSocketPtr disconnect: anURLString [
 ZMQInterface >> socket: aSocketPtr getOption: anOptionKey [
 
 	| aBuffer aSize |
-	aSize := (FFITypeArray ofType: 'size_t' size: 1) new.
+	aSize := FFIArray newType: #size_t size: 1.
 	aSize at: 1 put: 100.
-	aBuffer := (FFITypeArray ofType: 'int' size: (aSize at: 1)) new.
-	"	aBuffer := ByteArray new: 100."
+	"aBuffer := (FFITypeArray ofType: 'char' size: (aSize at: 1)) new."
+	aBuffer := FFIArray newType: #char size: 100.
+
 
 	^ [
 	  ZMQLibraryInterface
@@ -198,13 +199,22 @@ ZMQInterface >> socket: aSocketPtr send: buffer flags: flags [
 { #category : #'api - socket - options deprecated' }
 ZMQInterface >> socket: pointer setOption: aKeyOption optValue: aValueOption [
 
+	| aSize |
+	"aSize := (FFITypeArray ofType: 'int' size: 1) new.
+	aSize at: 1 put: 100."
+	aSize := aValueOption class = ByteString
+		         ifTrue: [ aValueOption size ]
+		         ifFalse: [
+			         (FFITypeArray ofType: 'size_t' size: 1) new
+				         at: 1
+				         put: (aValueOption at: 1) ].
 
 	^ [
 	  ZMQLibraryInterface
 		  zmq_setsockopt: pointer
 		  with: aKeyOption
 		  with: aValueOption
-		  with: aValueOption size ]
+		  with: aSize ]
 		  on: Error
 		  do: [
 			  self error:

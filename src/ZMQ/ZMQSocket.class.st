@@ -15,9 +15,8 @@ type:<aSmallInteger>, a number that describes the type of socket, see ZMQConstan
 "
 Class {
 	#name : #ZMQSocket,
-	#superclass : #Object,
+	#superclass : #FFIExternalObject,
 	#instVars : [
-		'pointer',
 		'context',
 		'url',
 		'type'
@@ -50,14 +49,12 @@ ZMQSocket class >> connect: anURLString type: aSocketType [
 ZMQSocket class >> context: aContext type: aSocketType [
 
 	| socket ztype |
-	socket := self new.
-	socket context: aContext.
 	ztype := aSocketType isSymbol
 		         ifTrue: [ ZMQInterface default resolveType: aSocketType ]
-		         ifFalse: [ aSocketType ].
+		        ifFalse: [ aSocketType ].
+	socket := 	(ZMQInterface default socket: aContext getHandle type: ztype).
+	socket context: aContext.
 	socket type: ztype.
-	socket pointer:
-		(ZMQInterface default socket: socket context pointer type: ztype).
 	^ socket
 ]
 
@@ -75,11 +72,12 @@ ZMQSocket class >> type: aSocketType [
 
 { #category : #'api - connect' }
 ZMQSocket >> bind: anURLString [
-|ret|
+
+	| ret |
 	url := anURLString.
-	 pointer ifNotNil: [
-		  ret := ZMQInterface default socket: pointer bind: anURLString ].
-	self zmqErrorHandler: ret.
+	handle isNull ifFalse: [
+		ret := ZMQInterface default socket: handle bind: anURLString .
+	self zmqErrorHandler: ret] ifTrue: [ self error: 'Null socket error' ].
 	^ self
 ]
 
@@ -101,18 +99,21 @@ ZMQSocket >> cleanUp [
 ZMQSocket >> close [
 
 	| ret |
-	pointer ifNotNil: [ ret := ZMQInterface default socketClose: pointer ].
-	self zmqErrorHandler: ret.
+	handle isNull ifFalse: [ ret := ZMQInterface default socketClose: handle. 
+	self zmqErrorHandler: ret.]
+ifTrue:[ self error: 'Null socket error' ].
 	^ self
 ]
 
 { #category : #'api - connect' }
 ZMQSocket >> connect: anURLString [
-|ret|
+
+	| ret |
 	url := anURLString.
-	 pointer ifNotNil: [ret:=
-		  ZMQInterface default socket: pointer connect: anURLString ].
-	self zmqErrorHandler: ret.
+	handle isNull ifFalse: [
+		ret := ZMQInterface default socket: handle connect: anURLString.
+	self zmqErrorHandler: ret.]
+		ifTrue: [ self error: 'Null socket error' ].
 	^ ret
 ]
 
@@ -132,17 +133,19 @@ ZMQSocket >> context: anObject [
 ZMQSocket >> disconnect: anURLString [
 
 	| ret |
-	pointer ifNotNil: [
-		ret := ZMQInterface default socket: pointer disconnect: anURLString ].
-self zmqErrorHandler: ret.
+	handle isNull ifFalse: [
+		ret := ZMQInterface default socket: handle disconnect: anURLString.
+	self zmqErrorHandler: ret.]
+		ifTrue: [ self error: 'Null socket error' ].
 	^ self
 ]
 
 { #category : #'api - options' }
 ZMQSocket >> optionKey: aKeyOption [
-|ret|
-	 pointer ifNotNil: [
-		  ret:=ZMQInterface default socket: pointer getOption: aKeyOption ].
+
+	| ret |
+	handle isNull ifFalse: [
+		ret := ZMQInterface default socket: handle getOption: aKeyOption ].
 	self zmqErrorHandler: ret.
 	^ ret
 ]
@@ -151,25 +154,13 @@ ZMQSocket >> optionKey: aKeyOption [
 ZMQSocket >> optionKey: aKeyOption optValue: aValueOption [
 
 	| ret |
-	pointer ifNotNil: [
+	handle isNull ifFalse: [
 		ret := ZMQInterface default
-			       socket: pointer
+			       socket: handle
 			       setOption: aKeyOption
 			       optValue: aValueOption ].
 	self zmqErrorHandler: ret.
 	^ ret
-]
-
-{ #category : #accessing }
-ZMQSocket >> pointer [
-
-	^pointer
-]
-
-{ #category : #accessing }
-ZMQSocket >> pointer: anObject [
-
-	pointer := anObject
 ]
 
 { #category : #'api - messaging' }
@@ -214,7 +205,7 @@ ZMQSocket >> recv: aMaxSize flags: flags [
 	| aBuffer |
 	aBuffer := ByteArray new: aMaxSize.
 	ZMQInterface default
-		socket: pointer
+		socket: handle
 		recv: aBuffer
 		len: aMaxSize
 		flags: flags.
@@ -229,7 +220,7 @@ ZMQSocket >> recvMsgWithFlags: flags [
 	| message ret |
 	message := ValueHolder new.
 	ret := ZMQInterface default
-		       socket: pointer
+		       socket: handle
 		       recvMsg: message
 		       flags: flags.
 
@@ -256,13 +247,14 @@ ZMQSocket >> send: aStringOrByteArray [
 
 { #category : #'api - messaging' }
 ZMQSocket >> send: aStringOrByteArray flags: flags [
-|ret|
-	pointer ifNotNil: [ret :=
-		  ZMQInterface default
-			  socket: pointer
-			  send: aStringOrByteArray
-			  flags: flags ].
-		self zmqErrorHandler: ret.
+
+	| ret |
+	handle isNull ifFalse: [
+		ret := ZMQInterface default
+			       socket: handle
+			       send: aStringOrByteArray
+			       flags: flags ].
+	self zmqErrorHandler: ret.
 	^ ret
 ]
 
@@ -282,10 +274,11 @@ ZMQSocket >> type: aType [
 ZMQSocket >> unbind: anURLString [
 
 	| ret |
-	pointer ifNotNil: [
-		ret := ZMQInterface default socket: pointer unbind: anURLString ].
-
-	self zmqErrorHandler: ret.
+	handle isNull
+		ifFalse: [
+			ret := ZMQInterface default socket: handle unbind: anURLString.
+			self zmqErrorHandler: ret ]
+		ifTrue: [ self error: 'Null socket error' ].
 	^ self
 ]
 
