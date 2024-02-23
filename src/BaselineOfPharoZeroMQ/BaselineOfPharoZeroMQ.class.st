@@ -11,5 +11,5 @@ BaselineOfPharoZeroMQ >> baseline: spec [
 	spec for: #common do: [
 
 		"Packages"
-		spec package: 'PharoZeroMQ' ]
+		spec package: 'ZMQ' ]
 ]
