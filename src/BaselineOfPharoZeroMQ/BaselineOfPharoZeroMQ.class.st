@@ -1,6 +1,8 @@
 Class {
 	#name : #BaselineOfPharoZeroMQ,
+
 	#superclass : #BaselineOf,
+
 	#category : #BaselineOfPharoZeroMQ
 }
 
@@ -8,5 +10,7 @@ Class {
 BaselineOfPharoZeroMQ >> baseline: spec [
 
 	<baseline>
+
 	spec for: #common do: [ "Packages" spec package: 'ZMQ' ]
+
 ]
