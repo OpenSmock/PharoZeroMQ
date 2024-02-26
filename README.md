@@ -5,14 +5,14 @@
 
 # PharoZeroMQ
 
-This is a framework of ZeroMQ (ZMQ, ØMQ or 0MQ) on Pharo. Using ZMQ lets you create a connection between 2 images via an URL and eventually send messages to one another. You will find the bases of the library, but some methods might be missing as well as some constants options. You'll find in ZMQ-Samples examples on how to use certain methods to guide you.
+This is a framework of ZeroMQ (ZMQ, ØMQ or 0MQ) on Pharo. Using ZMQ lets you create a connection between 2 images via an URL and eventually send messages to one another. You will find the bases of the library, but some methods might be missing as well as some constant options. You'll find in ZMQ-Samples examples on how to use certain methods to guide you.
 
 ### What's to improve
 + _Receiving in a blocking way_ : To do that, a Threaded Worker needs to be used but every socket type doesn't necessarily support it. In this case, none of the implemented sockets can support multi-threading.
 
-+ _Get Socket Option_ : This method doesn't seem to work, the error obtaineed is : 'Ressource Temporarily Unavailable' no matter what was tried regarding the types of arguments.
++ _Get Socket Option_ : This method doesn't seem to work, the error obtained is : 'Ressource Temporarily Unavailable' no matter what was tried regarding the type of arguments.
 
-+ _Set Socket Option_ : Works with ByteArrays, so the use of ZMQ_SUBSCRIBE and UNSUBSCRIBE is possible as well as for other options that take same types arguments. There is however the same issue as with getsockopt for any other type requested by the method.
++ _Set Socket Option_ : Works with ByteArrays, so the use of ZMQ_SUBSCRIBE and UNSUBSCRIBE is possible as well as for other options that take same types arguments. There is however the same issue with getsockopt for any other type requested by the method.
 
 ## Getting Started
 
