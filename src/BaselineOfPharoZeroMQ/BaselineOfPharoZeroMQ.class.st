@@ -1,9 +1,7 @@
 Class {
 	#name : #BaselineOfPharoZeroMQ,
 
-
 	#superclass : #BaselineOf,
-
 	#category : #BaselineOfPharoZeroMQ
 }
 
