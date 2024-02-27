@@ -8,6 +8,6 @@ repoPath := Smalltalk os environment
                ^ self ].
 Stdio stdout print: repoPath; lf.
 
-"(IceRepositoryCreator new
+(IceRepositoryCreator new
   location: repoPath asFileReference;
-  createRepository) register."
+  createRepository) register.
