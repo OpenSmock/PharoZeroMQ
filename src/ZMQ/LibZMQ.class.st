@@ -30,17 +30,17 @@ LibZMQ class >> repositoryDirectory [
 { #category : #'accessing platform' }
 LibZMQ >> macLibraryName [
 
-	^ self class repositoryDirectory / 'include' / 'libzmq.dylib'
+	^ (self class repositoryDirectory / 'include' / 'libzmq.dylib')  asFileReference pathString
 ]
 
 { #category : #'accessing platform' }
 LibZMQ >> unixLibraryName [
 
-	^ self class repositoryDirectory / 'include' / 'libzmq.so'
+	^ (self class repositoryDirectory / 'include' / 'libzmq.so')  asFileReference pathString
 ]
 
 { #category : #'accessing platform' }
 LibZMQ >> win32LibraryName [
 
-	^ self class repositoryDirectory / 'include' / 'zmq.dll'
+	^ (self class repositoryDirectory / 'include' / 'zmq.dll') asFileReference pathString
 ]
