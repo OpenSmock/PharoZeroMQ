@@ -16,6 +16,7 @@ LibZMQ class >> repositoryDirectory [
 
 	| expectedName myRepository |
 	expectedName := 'pharozeromq'.
+	
 	myRepository := IceRepository registry
 		                detect: [ :each |
 		                each name asLowercase = expectedName ]
@@ -27,19 +28,19 @@ LibZMQ class >> repositoryDirectory [
 ]
 
 { #category : #'accessing platform' }
-LibZMQ >> macModuleName [
+LibZMQ >> macLibraryName [
 
 	^ self class repositoryDirectory / 'include' / 'libzmq.dylib'
 ]
 
 { #category : #'accessing platform' }
-LibZMQ >> unixModuleName [
+LibZMQ >> unixLibraryName [
 
-	^ self class repositoryDirectory / 'include' /  'libzmq.so'
+	^ self class repositoryDirectory / 'include' / 'libzmq.so'
 ]
 
 { #category : #'accessing platform' }
-LibZMQ >> win32ModuleName [
+LibZMQ >> win32LibraryName [
 
-	^self class repositoryDirectory / 'include' / 'zmq.dll'
+	^ self class repositoryDirectory / 'include' / 'zmq.dll'
 ]
