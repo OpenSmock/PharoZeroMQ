@@ -1,5 +1,5 @@
 SmalltalkCISpec {
-  #preloading: 'scripts/ciPreLoading.st',
+  #preloading : 'scripts/ciPreLoading.st',
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'PharoZeroMQ',
