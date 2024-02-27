@@ -11,18 +11,35 @@ Class {
 	#category : #'ZMQ-Libs'
 }
 
+{ #category : #accessing }
+LibZMQ class >> repositoryDirectory [
+
+	| expectedName myRepository |
+	expectedName := 'pharozeromq'.
+	myRepository := IceRepository registry
+		                detect: [ :each |
+		                each name asLowercase = expectedName ]
+		                ifNone: [
+			                self error:
+				                ('Did not find any repository named ''{1}'' in Git repository (case insensitive). ZMQ tests require it to access resources.'
+					                 format: { expectedName }) ].
+	^ myRepository location
+]
+
 { #category : #'accessing platform' }
 LibZMQ >> macModuleName [
-	^ 'libzmq.dylib'
+
+	^ self class repositoryDirectory / 'include' / 'libzmq.dylib'
 ]
 
 { #category : #'accessing platform' }
 LibZMQ >> unixModuleName [
-	^ 'libzmq.so'
+
+	^ self class repositoryDirectory / 'include' /  'libzmq.so'
 ]
 
 { #category : #'accessing platform' }
 LibZMQ >> win32ModuleName [
-	"While this is not a 'libc' properly, msvcrt has the functions we are defining here"
-	^ 'zmq.dll'
+
+	^self class repositoryDirectory / 'include' / 'zmq.dll'
 ]
