@@ -5,7 +5,7 @@
 
 # PharoZeroMQ
 
-This is a framework of ZeroMQ (ZMQ, ØMQ or 0MQ) on Pharo. Using ZMQ lets you create a connection between 2 images via an URL and eventually send messages to one another. You will find the bases of the library, but some methods might be missing as well as some constant options. You'll find in ZMQ-Samples examples on how to use certain methods to guide you.
+This is a framework of the [ZeroMQ Library](https://github.com/zeromq) ( also known as ZMQ, ØMQ or 0MQ) on Pharo. Using ZMQ lets you create a connection between 2 images via an URL and eventually send messages to one another. You will find the bases of the library, but some methods might be missing as well as some constant options. You'll find in ZMQ-Samples examples on how to use certain methods to guide you.
 
 ### What's to improve
 + _Receiving in a blocking way_ : To do that, a Threaded Worker needs to be used but every socket type doesn't necessarily support it. In this case, none of the implemented sockets can support multi-threading.
