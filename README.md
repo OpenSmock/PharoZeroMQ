@@ -12,7 +12,9 @@ This is a framework of the [ZeroMQ Library](https://github.com/zeromq) ( also kn
 
 + _Get Socket Option_ : This method doesn't seem to work, the error obtained is : 'Ressource Temporarily Unavailable' no matter what was tried regarding the type of arguments.
 
-+ _Set Socket Option_ : Works with ByteArrays, so the use of ZMQ_SUBSCRIBE and UNSUBSCRIBE is possible as well as for other options that take same types arguments. There is however the same issue with getsockopt for any other type requested by the method.
++ _Set Socket Option_ : Works with ByteArrays, so the use of ZMQ_SUBSCRIBE and UNSUBSCRIBE is possible as well as for other options that take same types arguments. There is however the same issue than getsockopt for any other type requested by the method.
+
++ _Library for other OS_ : For now, the only available library on this repository is zmq.dll which is for Windows. A zmq.so and zmq.dylib would let other OSs users use this repository. 
 
 ## Getting Started
 
