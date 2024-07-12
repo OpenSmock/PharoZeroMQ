@@ -2,6 +2,7 @@
    
 [![Pharo 11 CI](https://github.com/OpenSmock/PharoZeroMQ/actions/workflows/Pharo11CI.yml/badge.svg)](https://github.com/OpenSmock/PharoZeroMQ/actions/workflows/Pharo11CI.yml)
 [![Pharo 12 CI](https://github.com/OpenSmock/PharoZeroMQ/actions/workflows/Pharo12CI.yml/badge.svg)](https://github.com/OpenSmock/PharoZeroMQ/actions/workflows/Pharo12CI.yml)
+[![Pharo 13 CI](https://github.com/OpenSmock/PharoZeroMQ/actions/workflows/Pharo13CI.yml/badge.svg)](https://github.com/OpenSmock/PharoZeroMQ/actions/workflows/Pharo13CI.yml)
 
 # PharoZeroMQ
 
