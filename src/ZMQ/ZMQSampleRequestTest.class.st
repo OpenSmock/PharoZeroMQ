@@ -11,8 +11,7 @@ Class {
 ZMQSampleRequestTest >> setUp [
 
 	super setUp.
-	request := ZMQSampleRequest new.
-	ZMQConstants initConstants
+	request := ZMQSampleRequest new
 ]
 
 { #category : #running }

@@ -9,9 +9,9 @@ Class {
 
 { #category : #running }
 ZMQSampleClientPUBSUBTest >> setUp [
+
 	super setUp.
-	client := ZMQSampleClientPUBSUB new.
-	ZMQConstants initConstants .
+	client := ZMQSampleClientPUBSUB new
 ]
 
 { #category : #running }

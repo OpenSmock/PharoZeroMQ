@@ -11,8 +11,7 @@ Class {
 ZMQSampleReplyTest >> setUp [
 
 	super setUp.
-	reply := ZMQSampleReply new.
-	ZMQConstants initConstants
+	reply := ZMQSampleReply new
 ]
 
 { #category : #running }

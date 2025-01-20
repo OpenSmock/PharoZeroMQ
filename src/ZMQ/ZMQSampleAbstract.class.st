@@ -85,8 +85,7 @@ ZMQSampleAbstract >> initialize [
 	threadIsWorking := false.
 	thread := nil.
 	topicSender := String new.
-	topicReceiver := OrderedCollection new.
-	ZMQConstants initConstants
+	topicReceiver := OrderedCollection new
 ]
 
 { #category : #accessing }

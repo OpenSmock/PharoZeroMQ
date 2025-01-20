@@ -11,9 +11,7 @@ Class {
 ZMQSampleServerPUBSUBTest >> setUp [
 
 	super setUp.
-	server := ZMQSampleServerPUBSUB new.
-	ZMQConstants initConstants .
-	
+	server := ZMQSampleServerPUBSUB new
 ]
 
 { #category : #running }
