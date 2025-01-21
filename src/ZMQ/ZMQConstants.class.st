@@ -26,7 +26,7 @@ Class {
 }
 
 { #category : #'private - initialization' }
-ZMQConstants class >> initConstants [
+ZMQConstants class >> initialize [
 	"Available socket types"
 
 	ZMQ_PUB := 1.

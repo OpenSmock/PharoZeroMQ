@@ -11,8 +11,7 @@ Class {
 ZMQSampleAbstractTest >> setUp [
 
 	super setUp.
-	serverOrClient := ZMQSampleAbstract new.
-	ZMQConstants initConstants
+	serverOrClient := ZMQSampleAbstract new
 ]
 
 { #category : #running }

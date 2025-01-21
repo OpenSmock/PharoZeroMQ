@@ -60,8 +60,8 @@ ZMQSocket class >> context: aContext type: aSocketType [
 
 { #category : #'instance creation' }
 ZMQSocket class >> new: aSocketType [
-	ZMQConstants  initConstants .
-	^self type: aSocketType
+
+	^ self type: aSocketType
 ]
 
 { #category : #'instance creation' }
