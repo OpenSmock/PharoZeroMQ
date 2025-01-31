@@ -34,7 +34,6 @@ jobs:
       - name: Install zmq library for MacOS
         if: matrix.os == 'macos-latest'
         run: |
-          brew install
           brew install zeromq
           
       - uses: hpi-swa/setup-smalltalkCI@v1
