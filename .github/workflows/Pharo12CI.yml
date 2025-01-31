@@ -23,12 +23,19 @@ jobs:
         with: 
           fetch-depth: 0
 
-      #For Linux only
+      #For ubuntu only
       - name: Install zmq library for Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
           sudo apt-get install -y libzmq3-dev
+
+      #For macos only
+      - name: Install zmq library for MacOS
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install
+          brew install zeromq
           
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
